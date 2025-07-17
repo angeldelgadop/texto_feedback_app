@@ -4,3 +4,5 @@ jinja2
 openai
 fpdf
 python-multipart
+gunicorn==21.2.0
+
