@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Texto Chévere</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Texto Chévere ✍️</h1>
+        <form action="/feedback" method="post">
+            <input type="text" name="student_name" placeholder="Tu nombre" required><br>
+            <input type="text" name="exercise_title" placeholder="Título del ejercicio" required><br>
+            <select name="language">
+                <option value="español">Español</option>
+                <option value="inglés">Inglés</option>
+            </select><br>
+            <textarea name="student_text" rows="6" placeholder="Escribe tu texto aquí..." required></textarea><br>
+            <button type="submit">Enviar al profesor</button>
+        </form>
+
+        {% if feedback_text %}
+        <div class="feedback">
+            <h2>📝 Feedback:</h2>
+            <p>{{ feedback_text|safe }}</p>
+            <form action="/generate_pdf" method="post">
+                <input type="hidden" name="student_name" value="{{ student_name }}">
+                <input type="hidden" name="exercise_title" value="{{ exercise_title }}">
+                <input type="hidden" name="student_text" value="{{ student_text }}">
+                <input type="hidden" name="feedback_text" value="{{ feedback_text }}">
+                <button type="submit">Convertir a PDF</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
